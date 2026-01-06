@@ -181,5 +181,6 @@ export const EDUCATION = [
 export const SOCIAL_LINKS = [
   { name: 'LinkedIn', url: 'https://et.linkedin.com/in/henok-edmealem-21a976197' },
   { name: 'Behance', url: 'https://behance.net/henok-ed' },
+  { name: 'Resume', url: 'https://drive.google.com/file/d/1lhOdQ2xe3IAmDO5R3T-A_RX12ngslN76/view' },
   { name: 'Email', url: 'mailto:henok0ed@gmail.com' }
 ];
