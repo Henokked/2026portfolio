@@ -4,8 +4,8 @@ import { SOCIAL_LINKS } from '../constants';
 const Footer: React.FC = () => {
   return (
     <footer id="contact" className="max-w-4xl mx-auto px-6 py-12 border-t border-black/5 mt-6 space-y-8 scroll-mt-24">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-        <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex justify-center">
+        <div className="flex items-center gap-4 flex-nowrap">
           {SOCIAL_LINKS.map(link => (
             <a 
               key={link.name} 
@@ -14,16 +14,22 @@ const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-white border border-black/5 rounded-full text-xs font-black uppercase tracking-widest text-[#111111] hover:border-blue-600/30 hover:bg-blue-50/50 transition-all group shadow-sm"
             >
-              <svg className="w-3.5 h-3.5 rotate-[-45deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-              {link.name}
+              <div className="flex items-center gap-2">
+                <svg className="w-3.5 h-3.5 rotate-[-45deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <div className="flex flex-col items-start leading-tight">
+                  <span className="text-[11px] font-black uppercase tracking-widest">{link.name}</span>
+                  {link.name === 'Phone' && (
+                    <span className="text-[10px] text-[#6B7280] normal-case">+251 920 958 682</span>
+                  )}
+                  {link.name === 'Email' && (
+                    <span className="text-[10px] text-[#6B7280] normal-case">henok0ed@gmail.com</span>
+                  )}
+                </div>
+              </div>
             </a>
           ))}
-        </div>
-
-        <div className="flex items-center gap-2 text-2xl hover:scale-110 transition-transform cursor-default" title="Hello!">
-          👋
         </div>
       </div>
 
