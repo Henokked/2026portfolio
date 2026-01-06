@@ -3,7 +3,7 @@ import { SOCIAL_LINKS } from '../constants';
 
 const Footer: React.FC = () => {
   return (
-    <footer id="contact" className="max-w-4xl mx-auto px-6 py-20 border-t border-black/5 mt-12 space-y-20 scroll-mt-24">
+    <footer id="contact" className="max-w-4xl mx-auto px-6 py-12 border-t border-black/5 mt-6 space-y-8 scroll-mt-24">
       <div className="flex flex-col md:flex-row justify-between items-center gap-10">
         <div className="flex flex-wrap justify-center gap-4">
           {SOCIAL_LINKS.map(link => (
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
       <div className="text-center space-y-8">
         <div className="space-y-3">
           <p className="text-2xl font-black tracking-tight text-[#111111]">Henok Edmealem</p>
-          <p className="text-sm text-[#6B7280] font-bold tracking-widest uppercase">Senior Product Designer • Ethiopia</p>
+          <p className="text-sm text-[#6B7280] font-bold tracking-widest uppercase">UI.UX • Product Designer • Ethiopia</p>
         </div>
         <p className="text-sm font-medium text-[#4B5563] max-w-sm mx-auto leading-relaxed">
           Crafting intuitive and engaging user interfaces. Dedicated to continuous improvement through user-centric research and engineering-focused design.

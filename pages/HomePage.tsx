@@ -65,8 +65,8 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="mb-48 scroll-mt-32 max-w-6xl mx-auto px-2">
-        <div className="flex items-center gap-6 mb-16">
+      <section id="experience" className="mb-24 scroll-mt-32 max-w-6xl mx-auto px-2">
+        <div className="flex items-center gap-6 mb-8">
           <div className="p-5 bg-white border border-black/5 rounded-3xl shadow-sm">
              <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -75,12 +75,12 @@ const HomePage: React.FC = () => {
           <h2 className="text-5xl font-black text-[#111111] tracking-tighter">Career Path</h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-12">
+        <div className="grid grid-cols-1 gap-8">
           {EXPERIENCES.map((exp, idx) => (
             <ExperienceCard key={idx} experience={exp} />
           ))}
           
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-8">
             <div className="premium-card p-14 rounded-[3rem] space-y-12 flex flex-col justify-between hover:bg-gray-50/50 transition-colors">
               <div className="space-y-10">
                 <h3 className="text-3xl font-black text-[#111111] tracking-tight">Education</h3>
@@ -104,8 +104,8 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Infinite Slider */}
-      <section className="full-width -mx-[calc((100vw-100%)/2)] w-screen overflow-hidden mb-32 opacity-90 hover:opacity-100 transition-opacity duration-1000">
-        <div className="border-t border-black/5 pt-20 mb-12 flex justify-center">
+      <section className="full-width -mx-[calc((100vw-100%)/2)] w-screen overflow-hidden mb-20 opacity-90 hover:opacity-100 transition-opacity duration-1000">
+        <div className="border-t border-black/5 pt-12 mb-6 flex justify-center">
           <span className="text-[10px] font-black uppercase tracking-[0.5em] text-black/10">Sample works</span>
         </div>
         <InfiniteSlider />
