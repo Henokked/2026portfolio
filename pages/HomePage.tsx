@@ -94,7 +94,7 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white border border-black/5 p-14 rounded-[3rem] shadow-sm text-[#111111] flex flex-col justify-center space-y-10 relative overflow-hidden group">
+            <div className="bg-[#F4F4F7] border border-black/5 p-14 rounded-[3rem] shadow-sm text-[#F4F4F7] flex flex-col justify-center space-y-10 relative overflow-hidden group">
                <p className="text-4xl font-black leading-[1.1] relative z-10 text-gradient tracking-tighter">"Design is not just what it looks like. Design is how it works."</p>
                <p className="text-[#6B7280] font-black tracking-[0.4em] uppercase text-xs relative z-10 opacity-60">— Steve Jobs</p>
                <div className="absolute -bottom-16 -right-16 w-60 h-60 bg-blue-500/5 blur-[100px] rounded-full transition-transform duration-1000 group-hover:scale-150"></div>
