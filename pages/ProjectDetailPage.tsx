@@ -8,7 +8,7 @@ const ProjectDetailPage: React.FC = () => {
   const project = CASE_STUDIES.find(p => p.id === id) || CASE_STUDIES[0];
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-24 sm:py-32 space-y-24">
+    <div className="max-w-5xl mx-auto px-4 py-12 sm:py-24 md:py-32 space-y-24">
       {/* Header Navigation */}
       <nav>
         <Link to="/" className="inline-flex items-center gap-3 text-[#6B7280] hover:text-[#111111] transition-colors font-black text-[10px] uppercase tracking-[0.2em] group">
@@ -29,8 +29,8 @@ const ProjectDetailPage: React.FC = () => {
               </span>
             ))}
           </div>
-          <h1 className="text-6xl sm:text-8xl font-black tracking-tighter text-[#111111] leading-none text-gradient">{project.title}</h1>
-          <p className="text-2xl sm:text-3xl text-[#4B5563] leading-snug font-medium max-w-3xl">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#111111] leading-none text-gradient">{project.title}</h1>
+          <p className="text-lg sm:text-2xl text-[#4B5563] leading-snug font-medium max-w-3xl">
             {project.subtitle}
           </p>
         </div>

@@ -63,11 +63,11 @@ const CaseStudyDetail: React.FC<Props> = ({ project }) => {
       {/* Project Gallery (2x2, large, opens in same tab) */}
       <div className="space-y-4">
         <h3 className="font-black text-2xl">Project Gallery</h3>
-        <div className="grid grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {(() => {
             const gallery = project.gallery ?? ['./images/Detail/bento.png','./images/Detail/footer.jpg','./images/Detail/card.jpg', project.image];
             return gallery.map((src, i) => (
-              <button key={i} type="button" onClick={() => { setCurrentImage(src); setModalOpen(true); }} className="block rounded-lg overflow-hidden bg-gray-50 border border-black/5 hover:scale-105 transition-transform cursor-pointer h-96 focus:outline-none">
+              <button key={i} type="button" onClick={() => { setCurrentImage(src); setModalOpen(true); }} className="block rounded-lg overflow-hidden bg-gray-50 border border-black/5 hover:scale-105 transition-transform cursor-pointer h-48 sm:h-72 md:h-96 focus:outline-none">
                 <img src={src} alt={`gallery ${i + 1}`} className="w-full h-full object-cover" />
               </button>
             ));

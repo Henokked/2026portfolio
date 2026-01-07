@@ -37,9 +37,9 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ project, index }) => {
       style={{ top: `${stickyTop}px`, zIndex: index + 1 }}
     >
       <div className="bg-[#FFFFFF] border border-black/5 rounded-[2.5rem] overflow-hidden shadow-[0_30px_70px_-20px_rgba(0,0,0,0.06)] group hover:border-black/10 transition-all duration-700 ease-out">
-        <div className="flex flex-col lg:flex-row min-h-[620px]">
+        <div className="flex flex-col lg:flex-row lg:min-h-[620px]">
           {/* Content Left */}
-          <div className="flex-[1.2] p-10 sm:p-16 lg:p-20 flex flex-col justify-center space-y-12 bg-gradient-to-br from-[#FFFFFF] via-[#FAFAFA] to-transparent">
+          <div className="flex-[1.2] p-6 sm:p-10 lg:p-16 flex flex-col justify-center space-y-8 bg-gradient-to-br from-[#FFFFFF] via-[#FAFAFA] to-transparent">
             <div className="space-y-6">
               <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-blue-600">
                 {project.caption || 'Case Study'}
@@ -64,10 +64,10 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ project, index }) => {
 
             {/* Metrics */}
             {project.metrics && (
-              <div className="flex gap-16 border-t border-black/5 pt-10">
+              <div className="flex gap-6 md:gap-16 border-t border-black/5 pt-6 md:pt-10">
                 {project.metrics.map((metric, i) => (
                   <div key={i} className="space-y-1 group/metric">
-                    <p className="text-3xl sm:text-4xl font-black text-[#111111] tracking-tighter transition-transform group-hover/metric:scale-105 duration-500 origin-left">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-black text-[#111111] tracking-tighter transition-transform group-hover/metric:scale-105 duration-500 origin-left">
                       {metric.value}
                     </p>
                     <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#9CA3AF]">
@@ -79,10 +79,10 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ project, index }) => {
             )}
 
             {/* CTA Button */}
-            <div className="pt-6">
+            <div className="pt-4">
               <Link 
                 to={`/project/${project.id}`}
-                className="group/btn relative inline-flex items-center justify-center px-12 py-5 bg-[#111111] text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:bg-blue-600 transform active:scale-95 shadow-lg"
+                className="group/btn relative inline-flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 bg-[#111111] text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-full overflow-hidden transition-all duration-500 hover:bg-blue-600 transform active:scale-95 shadow-lg"
               >
                 <span className="relative z-10">View Case Study</span>
               </Link>

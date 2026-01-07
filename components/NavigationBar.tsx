@@ -62,11 +62,11 @@ const NavigationBar: React.FC = () => {
   const isCaseStudyActive = activeSection === 'case-studies' || pathname.startsWith('/project/');
 
   return (
-    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50">
-      <div className="bg-white/70 backdrop-blur-2xl border border-black/5 p-1.5 rounded-full shadow-2xl flex items-center gap-1">
+    <div className="fixed sm:bottom-10 bottom-6 left-1/2 -translate-x-1/2 z-50">
+      <div className="bg-white/70 backdrop-blur-2xl border border-black/5 p-1 rounded-full shadow-2xl flex items-center gap-1 max-w-[90vw] sm:max-w-none">
         <button 
           onClick={() => handleScroll('case-studies')}
-          className={`flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
+          className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
             isCaseStudyActive 
               ? 'bg-[#111111] text-white shadow-lg' 
               : 'text-[#6B7280] hover:text-[#111111]'
@@ -77,7 +77,7 @@ const NavigationBar: React.FC = () => {
         </button>
         <button 
           onClick={() => handleScroll('experience')}
-          className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
+          className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
             pathname === '/' && activeSection === 'experience' 
               ? 'bg-[#111111] text-white shadow-lg' 
               : 'text-[#6B7280] hover:text-[#111111]'

@@ -13,13 +13,13 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className={`max-w-[1400px] mx-auto px-6 py-20 sm:py-32 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`max-w-[1400px] mx-auto px-4 py-12 sm:py-20 md:py-32 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
       {/* Hero Section */}
-      <section className="mb-48 space-y-16 stagger-in max-w-5xl px-2">
+      <section className="mb-24 md:mb-48 space-y-16 stagger-in max-w-5xl px-2">
         <div className="flex flex-col-reverse md:flex-row md:items-start justify-between gap-12">
           <div className="space-y-8 flex-1" style={{ animationDelay: '0.1s' }}>
-            <h1 className="text-6xl sm:text-8xl font-black tracking-tighter text-[#111111] leading-[0.9] text-gradient">Henok Edmealem</h1>
-            <p className="text-xl sm:text-3xl text-[#6B7280] font-semibold tracking-tight">Product Designer & UI/UX Designer </p>
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#111111] leading-[0.9] text-gradient">Henok Edmealem</h1>
+            <p className="text-lg sm:text-xl md:text-3xl text-[#6B7280] font-semibold tracking-tight">Product Designer & UI/UX Designer </p>
           </div>
           <div className="relative group" style={{ animationDelay: '0s' }}>
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-[3rem] opacity-10 group-hover:opacity-20 transition duration-700 blur-xl"></div>
@@ -37,13 +37,13 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="max-w-3xl space-y-8" style={{ animationDelay: '0.3s' }}>
-          <p className="text-3xl sm:text-4xl leading-snug font-regular text-[#111111]/90 tracking-tight">
+          <p className="text-xl sm:text-3xl leading-snug font-regular text-[#111111]/90 tracking-tight">
             I craft digital products that feel as good as they look. Specializing in high-performance SaaS, Fintech, and complex systems design.
           </p>
         </div>
 
         <div className="flex flex-wrap gap-4 pt-6" style={{ animationDelay: '0.4s' }}>
-          <div className="flex items-center gap-3 px-6 py-3 bg-white border border-black/5 shadow-sm rounded-full text-sm font-bold text-[#111111]/80">
+          <div className="flex items-center gap-3 px-4 py-2 sm:px-6 sm:py-3 bg-white border border-black/5 shadow-sm rounded-full text-sm font-bold text-[#111111]/80">
             <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.3)]"></span>
             Available for selected projects
           </div>
@@ -72,7 +72,7 @@ const HomePage: React.FC = () => {
                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
              </svg>
           </div>
-          <h2 className="text-5xl font-black text-[#111111] tracking-tighter">Career Path</h2>
+          <h2 className="text-3xl sm:text-5xl font-black text-[#111111] tracking-tighter">Career Path</h2>
         </div>
 
         <div className="grid grid-cols-1 gap-8">

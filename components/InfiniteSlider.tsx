@@ -13,10 +13,10 @@ const InfiniteSlider: React.FC = () => {
   const duplicatedImages = [...SLIDER_IMAGES, ...SLIDER_IMAGES];
 
   return (
-    <div className="relative overflow-hidden py-12">
+    <div className="relative overflow-hidden py-8 sm:py-12">
       <div className="animate-infinite-slider">
         {duplicatedImages.map((src, idx) => (
-          <div key={idx} className="flex-shrink-0 w-[450px] px-4">
+          <div key={idx} className="flex-shrink-0 w-[300px] sm:w-[350px] md:w-[450px] px-4">
             <div className="aspect-[16/10] rounded-[2rem] overflow-hidden bg-transparent border-0 group cursor-grab active:cursor-grabbing shadow-none transition-shadow duration-300">
               <img 
                 src={src} 
