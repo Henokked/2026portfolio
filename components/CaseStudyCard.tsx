@@ -10,8 +10,35 @@ interface CaseStudyCardProps {
 const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ project, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const stickyTop = 80 + (index * 32);
+  const galleryImages = project.gallery || [project.image];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -91,23 +118,71 @@ const CaseStudyCard: React.FC<CaseStudyCardProps> = ({ project, index }) => {
 
           {/* Mockup Visual Right */}
           <div className="flex-1 relative bg-gray-100 overflow-hidden group/visual">
-             <Link to={`/project/${project.id}`} className="block w-full h-full relative">
-               <div className="w-full h-full overflow-hidden">
-                 <img 
-                   src={project.image} 
-                   alt={project.title}
-                   className="w-full h-full object-cover mockup-zoom transition-transform duration-1000"
-                 />
-               </div>
-               
-               {/* Lighting Overlays */}
-               <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-40"></div>
-               
-               {/* Hover Text Reveal */}
-               <div className="absolute bottom-10 right-10 flex items-center gap-2 opacity-0 group-hover/visual:opacity-100 transition-all duration-700 translate-y-4 group-hover/visual:translate-y-0">
-                  <span className="text-[10px] font-black text-[#111111] uppercase tracking-widest bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-black/5">Explore Project</span>
-               </div>
-             </Link>
+            <Link to={`/project/${project.id}`} className="block w-full h-full relative">
+              <div className="w-full h-full overflow-hidden relative">
+                <img 
+                  src={galleryImages[currentImageIndex]} 
+                  alt={project.title}
+                  className="w-full h-full object-cover mockup-zoom transition-transform duration-1000"
+                />
+                
+                {/* Navigation Arrows */}
+                {galleryImages.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        prevImage();
+                      }}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white hover:text-gray-900 transition-all duration-300 opacity-0 group-hover/visual:opacity-100 shadow-lg border border-black/5"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        nextImage();
+                      }}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-700 hover:bg-white hover:text-gray-900 transition-all duration-300 opacity-0 group-hover/visual:opacity-100 shadow-lg border border-black/5"
+                    >
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+                
+                {/* Image Indicators */}
+                {galleryImages.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover/visual:opacity-100 transition-opacity duration-300">
+                    {galleryImages.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentImageIndex(idx);
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          idx === currentImageIndex 
+                            ? 'bg-white shadow-lg' 
+                            : 'bg-white/50 hover:bg-white/75'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Lighting Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-40"></div>
+              
+              {/* Hover Text Reveal */}
+              <div className="absolute bottom-10 right-10 flex items-center gap-2 opacity-0 group-hover/visual:opacity-100 transition-all duration-700 translate-y-4 group-hover/visual:translate-y-0">
+                <span className="text-[10px] font-black text-[#111111] uppercase tracking-widest bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-black/5">Explore Project</span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
