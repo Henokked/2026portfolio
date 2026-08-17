@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer id="contact" className="max-w-4xl mx-auto px-4 py-8 sm:py-12 border-t border-black/5 mt-6 space-y-8 scroll-mt-24 pb-24 sm:pb-12">
+    <footer id="contact" className="max-w-4xl mx-auto px-4 py-8 sm:py-10 border-t border-black/5 space-y-8 scroll-mt-24 pb-24 sm:pb-10">
       <div className="flex justify-center">
         <div role="navigation" aria-label="Footer social links" className="flex flex-wrap items-center gap-3 justify-center">
           {SOCIAL_LINKS.map(link => (

@@ -7,13 +7,47 @@ interface Props {
 
 const CaseStudyDetail: React.FC<Props> = ({ project }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
-  const [currentImage, setCurrentImage] = React.useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [direction, setDirection] = React.useState<'left' | 'right'>('right');
+
+  const gallery = React.useMemo(
+    () => project.gallery ?? ['./images/Detail/bento.png','./images/Detail/footer.jpg','./images/Detail/card.jpg', project.image],
+    [project]
+  );
+
+  // Reset to first image whenever the project changes
+  React.useEffect(() => {
+    setCurrentIndex(0);
+  }, [project.id]);
+
+  const nextImage = React.useCallback(() => {
+    setDirection('right');
+    setCurrentIndex((prev) => (prev + 1) % gallery.length);
+  }, [gallery.length]);
+
+  const prevImage = React.useCallback(() => {
+    setDirection('left');
+    setCurrentIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+  }, [gallery.length]);
 
   React.useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setModalOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setModalOpen(false);
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, []);
+  }, [nextImage, prevImage]);
+
+  // Lock the background page scroll while the full-screen viewer is open
+  React.useEffect(() => {
+    if (modalOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = originalOverflow; };
+    }
+  }, [modalOpen]);
 
   return (
     <section className="space-y-12">
@@ -60,25 +94,93 @@ const CaseStudyDetail: React.FC<Props> = ({ project }) => {
 
 
 
-      {/* Project Gallery (2x2, large, opens in same tab) */}
+      {/* Project Gallery (carousel with left/right swipe buttons) */}
       <div className="space-y-4">
-        <h3 className="font-black text-2xl">Project Gallery</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {(() => {
-            const gallery = project.gallery ?? ['./images/Detail/bento.png','./images/Detail/footer.jpg','./images/Detail/card.jpg', project.image];
-            return gallery.map((src, i) => (
-              <button key={i} type="button" onClick={() => { setCurrentImage(src); setModalOpen(true); }} className="block rounded-lg overflow-hidden bg-gray-50 border border-black/5 hover:scale-105 transition-transform cursor-pointer h-48 sm:h-72 md:h-96 focus:outline-none">
-                <img src={src} alt={`gallery ${i + 1}`} className="w-full h-full object-cover" />
-              </button>
-            ));
-          })()}
+        <div className="flex items-center justify-between">
+          <h3 className="font-black text-2xl">Project Gallery</h3>
+          <span className="text-sm font-bold text-[#9CA3AF]">{currentIndex + 1} / {gallery.length}</span>
         </div>
 
-        {modalOpen && currentImage && (
-          <div onClick={() => setModalOpen(false)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
-            <div onClick={(e) => e.stopPropagation()} className="relative max-w-4xl w-full">
-              <button onClick={() => setModalOpen(false)} className="absolute right-0 top-0 m-2 text-white text-3xl leading-none">&times;</button>
-              <img src={currentImage} alt="full-size" className="w-full h-auto max-h-[80vh] object-contain rounded-lg" />
+        <div className="relative max-w-5xl mx-auto group/gal">
+          {/* Prev / Prev button */}
+          <button
+            type="button"
+            aria-label="Previous image"
+            onClick={prevImage}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/90 text-[#111111] text-2xl shadow-xl border border-black/10 hover:bg-white hover:scale-110 active:scale-95 transition-transform cursor-pointer focus:outline-none"
+          >
+            &#8249;
+          </button>
+
+          {/* Current large image */}
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="block w-full rounded-2xl overflow-hidden bg-gray-50 border border-black/5 focus:outline-none"
+          >
+            <img
+              key={gallery[currentIndex]}
+              src={gallery[currentIndex]}
+              alt={`gallery ${currentIndex + 1}`}
+              className={`w-full h-64 sm:h-96 md:h-[32rem] object-cover transition-transform duration-500 ${direction === 'right' ? 'gallery-slide-right' : 'gallery-slide-left'}`}
+            />
+          </button>
+
+          {/* Next / swipe button */}
+          <button
+            type="button"
+            aria-label="Next image"
+            onClick={nextImage}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-white/90 text-[#111111] text-2xl shadow-xl border border-black/10 hover:bg-white hover:scale-110 active:scale-95 transition-transform cursor-pointer focus:outline-none"
+          >
+            &#8250;
+          </button>
+
+          {/* Thumbnail indicators */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-3 rounded-full bg-black/40 backdrop-blur px-4 py-2">
+            {gallery.map((src, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to image ${i + 1}`}
+                onClick={() => setCurrentIndex(i)}
+                className={`w-12 h-9 rounded-md overflow-hidden border-2 transition-all cursor-pointer focus:outline-none ${
+                  i === currentIndex
+                    ? 'border-white scale-110 shadow-lg'
+                    : 'border-transparent opacity-60 hover:opacity-100'
+                }`}
+              >
+                <img src={src} alt={`gallery thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {modalOpen && gallery[currentIndex] && (
+          <div
+            onClick={() => setModalOpen(false)}
+            onWheel={(e) => e.preventDefault()}
+            onTouchMove={(e) => e.preventDefault()}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 touch-none overscroll-none select-none"
+          >
+            <div onClick={(e) => e.stopPropagation()} className="relative w-full h-full flex items-center justify-center">
+              {/* Close button */}
+              <button onClick={() => setModalOpen(false)} aria-label="Close image" className="absolute top-4 md:top-6 right-4 md:right-6 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#111111] text-3xl leading-none shadow-2xl hover:bg-gray-100 hover:scale-110 active:scale-95 transition-transform cursor-pointer">&times;</button>
+
+              {/* Prev / swipe button */}
+              <button type="button" aria-label="Previous image" onClick={prevImage} className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white text-[#111111] text-3xl shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer">&#8249;</button>
+
+              <img
+                key={gallery[currentIndex]}
+                src={gallery[currentIndex]}
+                alt="full-screen"
+                className={`max-w-full max-h-full object-contain ${direction === 'right' ? 'gallery-slide-right' : 'gallery-slide-left'}`}
+              />
+
+              {/* Next / swipe button */}
+              <button type="button" aria-label="Next image" onClick={nextImage} className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white text-[#111111] text-3xl shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer">&#8250;</button>
+
+              <p className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 text-white text-lg font-bold bg-black/50 px-4 py-2 rounded-full">{currentIndex + 1} / {gallery.length}</p>
             </div>
           </div>
         )}

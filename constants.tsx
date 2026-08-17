@@ -78,7 +78,7 @@ export const CASE_STUDIES: CaseStudy[] = [
      gallery: [
       '/images/Detail/ppcover.jpg',
       '/images/Detail/sign.jpg',
-      '/images/Detail/Home.jpg',
+      '/images/Detail/home.jpg',
       '/images/Detail/xc.jpg',
     ],
   

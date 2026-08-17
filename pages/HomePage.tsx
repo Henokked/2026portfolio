@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
   return (
     <div className={`max-w-[1400px] mx-auto px-4 py-12 sm:py-20 md:py-32 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
       {/* Hero Section */}
-      <section className="mb-24 md:mb-48 space-y-16 stagger-in max-w-5xl px-2">
+      <section className="mb-10 md:mb-16 space-y-16 stagger-in max-w-5xl px-2">
         <div className="flex flex-col-reverse md:flex-row md:items-start justify-between gap-12">
           <div className="space-y-8 flex-1" style={{ animationDelay: '0.1s' }}>
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#111111] leading-[0.9] text-gradient">Henok Edmealem</h1>
@@ -104,7 +104,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Infinite Slider */}
-      <section className="full-width -mx-[calc((100vw-100%)/2)] w-screen overflow-hidden mb-20 opacity-90 hover:opacity-100 transition-opacity duration-1000">
+      <section className="full-width -mx-[calc((100vw-100%)/2)] w-screen overflow-hidden mb-2 opacity-90 hover:opacity-100 transition-opacity duration-1000">
         <div className="border-t border-black/5 pt-12 mb-6 flex justify-center">
           <span className="text-[10px] font-black uppercase tracking-[0.5em] text-black/10">Sample works</span>
         </div>
