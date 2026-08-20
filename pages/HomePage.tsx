@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
         <div className="flex flex-col-reverse md:flex-row md:items-start justify-between gap-12">
           <div className="space-y-8 flex-1" style={{ animationDelay: '0.1s' }}>
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter text-[#111111] leading-[0.9] text-gradient">Henok Edmealem</h1>
-            <p className="text-lg sm:text-xl md:text-3xl text-[#6B7280] font-semibold tracking-tight">Product Designer & UI/UX Designer </p>
+            <p className="text-lg sm:text-xl md:text-3xl text-[#6B7280] font-semibold tracking-tight">UI/UX &amp; Product Designer</p>
           </div>
           <div className="relative group" style={{ animationDelay: '0s' }}>
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-[3rem] opacity-10 group-hover:opacity-20 transition duration-700 blur-xl"></div>
