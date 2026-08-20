@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { CASE_STUDIES, EXPERIENCES, EDUCATION } from '../constants';
-import CaseStudyCard from '../components/CaseStudyCard';
+import { CASE_STUDIES, EXPERIENCES, EDUCATION, SOCIAL_LINKS } from '../constants';
+import CaseStudyGridCard from '../components/CaseStudyGridCard';
 import ExperienceCard from '../components/ExperienceCard';
 import InfiniteSlider from '../components/InfiniteSlider';
 import GeneratedProfileImage from '../components/GeneratedProfileImage';
@@ -42,24 +42,35 @@ const HomePage: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 pt-6" style={{ animationDelay: '0.4s' }}>
+        <div className="flex flex-wrap items-center gap-4 pt-6" style={{ animationDelay: '0.4s' }}>
           <div className="flex items-center gap-3 px-4 py-2 sm:px-6 sm:py-3 bg-white border border-black/5 shadow-sm rounded-full text-sm font-bold text-[#111111]/80">
             <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.3)]"></span>
             Available for selected projects
           </div>
+          <a
+            href={SOCIAL_LINKS.find(l => l.name === 'Resume')?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-6 py-3 bg-[#111111] text-white rounded-full text-sm font-black uppercase tracking-widest shadow-lg transition-all duration-300 hover:bg-blue-600 hover:shadow-blue-600/25 hover:-translate-y-0.5 group"
+          >
+            View Resume
+            <svg className="w-4 h-4 rotate-[-45deg] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
       </section>
 
-      {/* Case Studies - Stacking Effect */}
-      <section id="case-studies" className="space-y-8 mb-80 scroll-mt-32 px-2">
-        <div className="border-b border-black/5 pb-8 mb-20 flex items-baseline justify-between">
-           <h2 className="text-xs font-black uppercase tracking-[0.4em] text-black/30">Selected Product Work</h2>
-           <span className="text-[10px] font-black text-black/20 tracking-[0.3em] uppercase">Scroll down</span>
+      {/* Case Studies - 2-col card grid */}
+      <section id="case-studies" className="scroll-mt-32 px-2 mb-24 md:mb-32">
+        <div className="border-b border-black/10 pb-8 mb-10 flex items-end justify-between gap-6">
+          <h2 className="text-xs font-black uppercase tracking-[0.4em] text-black/40">Selected Projects</h2>
+          <span className="text-[10px] font-black text-black/30 tracking-[0.3em] uppercase">Click to explore</span>
         </div>
 
-        <div className="relative space-y-8">
-          {CASE_STUDIES.map((project, index) => (
-             <CaseStudyCard key={project.id} project={project} index={index} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {CASE_STUDIES.map((project, i) => (
+            <CaseStudyGridCard key={project.id} project={project} index={i + 1} />
           ))}
         </div>
       </section>

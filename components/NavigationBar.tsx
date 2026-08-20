@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import GeneratedProfileImage from './GeneratedProfileImage';
+import { SOCIAL_LINKS } from '../constants';
 
 const NavigationBar: React.FC = () => {
   const { pathname } = useLocation();
@@ -85,6 +86,17 @@ const NavigationBar: React.FC = () => {
         >
           About
         </button>
+        <a
+          href={SOCIAL_LINKS.find(l => l.name === 'Resume')?.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-3 sm:px-6 py-2 sm:py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all text-[#6B7280] hover:text-[#111111] flex items-center gap-1.5"
+        >
+          Resume
+          <svg className="w-3.5 h-3.5 rotate-[-45deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
       </div>
     </div>
   );
